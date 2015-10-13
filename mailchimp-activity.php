@@ -27,7 +27,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-use MC4WP\Activity;
+use MC4WP\Activity\Plugin;
+use MC4WP\Activity\AJAX;
 
 // Prevent direct file access
 if( ! defined( 'ABSPATH' ) ) {
@@ -43,12 +44,17 @@ add_action( 'plugins_loaded', function() {
 
 	// instantiate plugin object
 	// todo: move to where it's needed
-	$plugin = new MC4WP\Activity\Plugin( __FILE__, '1.0' );
+	$plugin = new Plugin( __FILE__, '1.0' );
 
 	// this plugin is admin only
 	if( is_admin() ) {
 		$widget = new MC4WP\Activity\Dashboard\Widget( $plugin );
 		$widget->add_hooks();
+
+		if( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			$ajax = new AJAX();
+			$ajax->hook();
+		}
 	}
 
 

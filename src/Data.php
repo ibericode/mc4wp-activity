@@ -17,7 +17,7 @@ class Data {
 	/**
 	 * @return array
 	 */
-	public function toArray() {
+	public function to_array() {
 
 		$array = array();
 

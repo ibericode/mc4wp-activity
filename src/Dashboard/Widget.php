@@ -6,6 +6,7 @@ use MC4WP\Activity\Plugin;
 use MC4WP\Activity\Data;
 use MC4WP\Activity\API;
 
+use MC4WP_MailChimp;
 use WP_Screen;
 
 class Widget {
@@ -46,61 +47,20 @@ class Widget {
 			return false;
 		}
 
-		wp_enqueue_script( 'mc4wp-activity',  $this->plugin->url( '/assets/js/dashboard-widget.js' ), array(), $this->plugin->version );
+		wp_enqueue_script( 'google-js-api', 'https://www.google.com/jsapi' );
+		wp_enqueue_script( 'mc4wp-activity',  $this->plugin->url( '/assets/js/dashboard-widget.js' ), array( 'google-js-api' ), $this->plugin->version, true );
 		return true;
 	}
 
 	public function output() {
+		$mailchimp = new MC4WP_MailChimp();
+		echo '<label for="mc4wp-activity-mailchimp-list">Select MailChimp list</label>' . ' &nbsp; ';;
+		echo '<select id="mc4wp-activity-mailchimp-list">';
+		foreach ( $mailchimp->get_lists() as $list ) {
+			echo sprintf( '<option value="%s">%s</option>', $list->id, $list->name );
+		}
+		echo '</select>';
 
-		/* @todo move to setting, preferably in JS only */
-		$list_id = 'a940232df9';
-		$api = new API( mc4wp_get_options('general')['api_key'] );
-		$data = new Data( $api, $list_id );
-		//wp_localize_script( 'mc4wp-activity', 'mc4wp_activity_rows', $data->toArray() );
-		?>
-		<!--Div that will hold the pie chart-->
-		<div id="chart_div">Loading..</div>
-
-		<?php /* @todo move to separate JS file */ ?>
-		<!--Load the AJAX API-->
-		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-		<script type="text/javascript">
-
-			var rows = <?php echo json_encode( $data->toArray() ); ?>;
-
-			// convert strings to JavaScript Date object
-			for( var i=0; i<rows.length; i++ ) {
-				rows[i][0].v = new Date(rows[i][0].v);
-			}
-
-			google.load('visualization', '1', {packages: ['corechart', 'bar']});
-			google.setOnLoadCallback(drawStacked);
-
-			function drawStacked() {
-				var data = new google.visualization.DataTable();
-				data.addColumn('date', 'Date');
-				data.addColumn('number', 'New Subscribers');
-				data.addColumn('number', 'Unsubscribes');
-
-				data.addRows(rows);
-
-				var options = {
-					title: 'Activity for list "MailChimp for WordPress"',
-					isStacked: true,
-					hAxis: {
-						title: 'Date',
-						format: 'MMM d'
-					},
-					vAxis: {
-						title: 'Subscriber Activity'
-					},
-					height: 350
-				};
-
-				var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-				chart.draw(data, options);
-			}
-		</script>
-		<?php
+		echo '<div id="mc4wp-activity-chart"><p>Loading..</p></div>';
 	}
 }
