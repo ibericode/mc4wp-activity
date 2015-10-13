@@ -5,11 +5,18 @@
 	var listSelector = document.getElementById('mc4wp-activity-mailchimp-list');
 
 	listSelector.onchange = getRowData;
+	var previouslySelectedListValue = localStorage.getItem('mc4wp_activity_list');
+	if( typeof( previouslySelectedListValue ) === "string" ) {
+		listSelector.value = previouslySelectedListValue;
+	}
 
 	google.load('visualization', '1', {packages: ['corechart', 'bar']});
 	google.setOnLoadCallback(getRowData);
 
 	function getRowData() {
+
+		localStorage.setItem( 'mc4wp_activity_list', listSelector.value );
+
 		$.getJSON( ajaxurl, {
 			action: 'mc4wp_get_activity',
 			mailchimp_list_id: listSelector.value
@@ -43,7 +50,17 @@
 			vAxis: {
 				title: 'Subscriber Activity'
 			},
-			height: 350
+			explorer: {
+				maxZoomOut:2,
+				keepInBounds: true,
+				maxZoomIn: 5
+			},
+			animation: {
+				duration: 1000,
+				easing: 'linear',
+				startup: true
+			},
+			height: 400
 		};
 
 		var chart = new google.visualization.ColumnChart(document.getElementById("mc4wp-activity-chart"));
