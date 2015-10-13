@@ -2,6 +2,8 @@
 	'use strict';
 
 	var rows = [];
+	var yMax = 0;
+	var yMin = 0;
 	var listSelector = document.getElementById('mc4wp-activity-mailchimp-list');
 
 	listSelector.onchange = getRowData;
@@ -15,6 +17,11 @@
 
 	function getRowData() {
 
+		// restore data
+		rows = [];
+		yMin = 0;
+		yMax = 0;
+
 		localStorage.setItem( 'mc4wp_activity_list', listSelector.value );
 
 		$.getJSON( ajaxurl, {
@@ -26,6 +33,14 @@
 			// convert strings to JavaScript Date object
 			for( var i=0; i< rows.length; i++ ) {
 				rows[i][0].v = new Date(rows[i][0].v);
+
+				if(rows[i][1] > yMax ) {
+					yMax = rows[i][1];
+				}
+
+				if(rows[i][2] < yMin ) {
+					yMin = rows[i][2];
+				}
 			}
 
 			drawChart();
@@ -48,7 +63,11 @@
 				format: 'MMM d'
 			},
 			vAxis: {
-				title: 'Subscriber Activity'
+				title: 'Subscriber Activity',
+				viewWindow: {
+					max: yMax * 1.1,
+					min: yMin * 1.1
+				}
 			},
 			explorer: {
 				maxZoomOut:2,
