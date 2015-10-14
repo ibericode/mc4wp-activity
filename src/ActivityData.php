@@ -4,10 +4,16 @@ namespace MC4WP\Activity;
 
 use DateTime;
 
-class Data {
+class ActivityData {
+
+	/**
+	 * @var array
+	 */
+	protected $data  = array();
 
 	/**
 	 * @param API $api
+	 * @param string $list_id
 	 */
 	public function __construct( API $api, $list_id ) {
 		$this->data = $api->get_lists_activity( $list_id );

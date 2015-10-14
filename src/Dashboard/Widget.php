@@ -23,11 +23,17 @@ class Widget {
 		$this->plugin = $plugin;
 	}
 
+	/**
+	 * Add hooks
+	 */
 	public function add_hooks() {
 		add_action( 'wp_dashboard_setup', array( $this, 'register' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
+	/**
+	 * Register self as dashboard widget
+	 */
 	public function register() {
 		wp_add_dashboard_widget(
 			'mc4wp_activity_widget',         // Widget slug.
@@ -36,6 +42,11 @@ class Widget {
 		);
 	}
 
+	/**
+	 * Enqueue scripts, but only if on dashboard page.
+	 *
+	 * @return bool
+	 */
 	public function enqueue_scripts() {
 		$screen = get_current_screen();
 
@@ -52,15 +63,30 @@ class Widget {
 		return true;
 	}
 
+	/**
+	 * Output widget
+	 */
 	public function output() {
 		$mailchimp = new MC4WP_MailChimp();
+		$options = array(
+			'activity' => __( 'Activity', 'mailchimp-activity' ),
+			'size' => __( 'Size', 'mailchimp-activity' )
+		);
+
+		echo '<p>';
 		echo '<label for="mc4wp-activity-mailchimp-list">Select MailChimp list</label>' . ' &nbsp; ';;
 		echo '<select id="mc4wp-activity-mailchimp-list">';
 		foreach ( $mailchimp->get_lists() as $list ) {
 			echo sprintf( '<option value="%s">%s</option>', $list->id, $list->name );
 		}
 		echo '</select>';
+		echo '<select id="mc4wp-activity-view">';
+		foreach( $options as $value => $label ) {
+			echo sprintf( '<option value="%s">%s</option>', $value, $label );
+		}
+		echo '</select>';
+		echo '</p>';
 
-		echo '<div id="mc4wp-activity-chart"><p>Loading..</p></div>';
+		echo '<div id="mc4wp-activity-chart"><p class="help">Loading..</p></div>';
 	}
 }

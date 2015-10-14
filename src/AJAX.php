@@ -11,7 +11,13 @@ class AJAX {
 	public function get_activity() {
 		$list_id   = $_REQUEST['mailchimp_list_id'];
 		$api       = new API( mc4wp_get_options( 'general' )['api_key'] );
-		$data      = new Data( $api, $list_id );
+
+		if( $_REQUEST['view'] === 'activity' ) {
+			$data      = new ActivityData( $api, $list_id );
+		} else {
+			$data      = new SizeData( $api, $list_id );
+		}
+
 		wp_send_json_success( $data->to_array() );
 	}
 
