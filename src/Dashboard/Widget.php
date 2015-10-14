@@ -9,6 +9,12 @@ use MC4WP\Activity\API;
 use MC4WP_MailChimp;
 use WP_Screen;
 
+/**
+ * Class Widget
+ * @package MC4WP\Activity\Dashboard
+ *
+ * @todo stop doing things when dependencies not ready (no API key, etc..)
+ */
 class Widget {
 
 	/**
@@ -27,6 +33,15 @@ class Widget {
 	 * Add hooks
 	 */
 	public function add_hooks() {
+		add_action( 'init', array( $this, 'lazy_hooks' ) );
+	}
+
+	public function lazy_hooks() {
+
+		if( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		add_action( 'wp_dashboard_setup', array( $this, 'register' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
