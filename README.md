@@ -2,4 +2,13 @@
 
 Shows your MailChimp lists activity right in your WordPress dashboard.
 
-> This plugin is an add-on for [MailChimp for WordPress](https://mc4wp.com).
+### Requirements
+
+This plugin has the following requirements:
+
+- [MailChimp for WordPress](https://mc4wp.com).
+- PHP 5.3 or higher.
+
+### License
+
+GPLv2 licensed.
