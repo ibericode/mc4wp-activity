@@ -1,6 +1,6 @@
 {
-  "name": "dannyvankooten/mc4wp-activity-widget",
-  "description": "MailChimp plugin for WordPress",
+  "name": "dannyvankooten/mailchimp-activity",
+  "description": "MailChimp Activity widget for WordPress",
   "keywords": ["wordpress", "mailchimp"],
   "homepage": "https://mc4wp.com/",
   "license": "GPL-2.0+",
@@ -13,9 +13,9 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/ibericode/mailchimp-for-wordpress/issues",
-    "forum": "https://wordpress.org/support/plugin/mailchimp-for-wp",
-    "source": "https://github.com/ibericode/mailchimp-for-wordpress"
+    "issues": "https://github.com/ibericode/mailchimp-activity/issues",
+    "forum": "https://wordpress.org/support/plugin/mailchimp-activity",
+    "source": "https://github.com/ibericode/mailchimp-activity"
   },
   "require": {
     "php": ">=5.3.0"

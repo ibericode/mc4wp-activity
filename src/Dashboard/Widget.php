@@ -2,10 +2,7 @@
 
 namespace MC4WP\Activity\Dashboard;
 
-use MC4WP\Activity\Plugin;
-use MC4WP\Activity\Data;
-use MC4WP\Activity\API;
-
+use MC4WP_Plugin as Plugin;
 use MC4WP_MailChimp;
 use WP_Screen;
 
@@ -13,7 +10,6 @@ use WP_Screen;
  * Class Widget
  * @package MC4WP\Activity\Dashboard
  *
- * @todo stop doing things when dependencies not ready (no API key, etc..)
  */
 class Widget {
 
@@ -38,7 +34,17 @@ class Widget {
 
 	public function lazy_hooks() {
 
-		if( ! current_user_can( 'manage_options' ) ) {
+		$capability = 'manage_options';
+		/**
+		 * Filters the required capability for showing the Activity widget.
+		 *
+		 * Defaults to `manage_options`
+		 *
+		 * @param string $capability
+		 */
+		$capability = (string) apply_filters( 'mc4wp_activity_capability', $capability );
+
+		if( ! current_user_can( $capability ) ) {
 			return;
 		}
 
@@ -50,6 +56,13 @@ class Widget {
 	 * Register self as dashboard widget
 	 */
 	public function register() {
+
+		// do nothing if API key is not set
+		$options = mc4wp_get_options();
+		if( empty( $options['api_key'] ) ) {
+			return;
+		}
+
 		wp_add_dashboard_widget(
 			'mc4wp_activity_widget',         // Widget slug.
 			'MailChimp Activity',         // Title.
@@ -73,8 +86,11 @@ class Widget {
 			return false;
 		}
 
+		// load minified version when SCRIPT_DEBUG is not enabled
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
 		wp_enqueue_script( 'google-js-api', 'https://www.google.com/jsapi' );
-		wp_enqueue_script( 'mc4wp-activity',  $this->plugin->url( '/assets/js/dashboard-widget.js' ), array( 'google-js-api' ), $this->plugin->version, true );
+		wp_enqueue_script( 'mc4wp-activity',  $this->plugin->url( "/assets/js/dashboard-widget{$suffix}.js" ), array( 'google-js-api' ), $this->plugin->version(), true );
 		return true;
 	}
 
@@ -89,19 +105,21 @@ class Widget {
 		);
 
 		echo '<p>';
-		echo '<label for="mc4wp-activity-mailchimp-list">Select MailChimp list</label>' . ' &nbsp; ';;
+		echo '<label for="mc4wp-activity-mailchimp-list">' . __( 'Select MailChimp list', 'mailchimp-activity' ) . '</label>' . ' &nbsp; ';;
 		echo '<select id="mc4wp-activity-mailchimp-list">';
+		echo '<option disabled>' . __( 'MailChimp list', 'mailchimp-for-wp' ) . '</option>';
 		foreach ( $mailchimp->get_lists() as $list ) {
 			echo sprintf( '<option value="%s">%s</option>', $list->id, $list->name );
 		}
 		echo '</select>';
 		echo '<select id="mc4wp-activity-view">';
+		echo '<option disabled>' . __( 'View', 'mailchimp-for-wp' ) . '</option>';
 		foreach( $options as $value => $label ) {
 			echo sprintf( '<option value="%s">%s</option>', $value, $label );
 		}
 		echo '</select>';
 		echo '</p>';
 
-		echo '<div id="mc4wp-activity-chart"><p class="help">Loading..</p></div>';
+		echo '<div id="mc4wp-activity-chart"><p class="help">' . __( 'Loading..', 'mailchimp-activity' ) . '</p></div>';
 	}
 }

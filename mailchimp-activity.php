@@ -1,17 +1,17 @@
 <?php
 /*
 Plugin Name: MailChimp Activity
-Plugin URI: https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=plugins-page
+Plugin URI: https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-activity&utm_campaign=plugins-page
 Description: Shows your MailChimp activity, right in your WordPress dashboard.
 Version: 1.0
 Author: ibericode
 Author URI: https://ibericode.com/
-Text Domain: mailchimp-lists-activity-widget
+Text Domain: mailchimp-activity
 Domain Path: /languages
 License: GPL v2
 
-MailChimp for WordPress - Lists Activity Widget
-Copyright (C) 2015, Danny van Kooten, hi@dannyvankooten.com
+MailChimp Activity
+Copyright (C) 2015, ibericode <support@ibericode.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -27,17 +27,22 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-use MC4WP\Activity\Plugin;
+use MC4WP_Plugin as Plugin;
 use MC4WP\Activity\AJAX;
 
-// Prevent direct file access
-if( ! defined( 'ABSPATH' ) ) {
-	header( 'Status: 403 Forbidden' );
-	header( 'HTTP/1.1 403 Forbidden' );
-	exit;
-}
+defined( 'ABSPATH' ) or exit;
 
-add_action( 'plugins_loaded', function() {
+/**
+ * Bootstraps the plugin
+ *
+ * @ignore
+ */
+function __load_mailchimp_activity() {
+
+	// check if MailChimp for WordPress is installed.
+	if( ! defined( 'MC4WP_VERSION' ) ) {
+		return;
+	}
 
 	// load autoloader
 	require __DIR__ . '/vendor/autoload.php';
@@ -46,16 +51,18 @@ add_action( 'plugins_loaded', function() {
 	// todo: move to where it's needed
 	$plugin = new Plugin( __FILE__, '1.0' );
 
-	// this plugin is admin only
-	if( is_admin() ) {
-		$widget = new MC4WP\Activity\Dashboard\Widget( $plugin );
-		$widget->add_hooks();
+	$widget = new MC4WP\Activity\Dashboard\Widget( $plugin );
+	$widget->add_hooks();
 
-		if( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			$ajax = new AJAX();
-			$ajax->hook();
-		}
+	if( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		$ajax = new AJAX();
+		$ajax->hook();
 	}
+}
+
+// only hook when this is an admin request
+if( is_admin() ) {
+	add_action( 'plugins_loaded', '__load_mailchimp_activity', 30 );
+}
 
 
-}, 20 );

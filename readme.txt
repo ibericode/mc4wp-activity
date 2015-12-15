@@ -1,0 +1,59 @@
+=== MailChimp Activity ===
+Contributors: Ibericode, DvanKooten, iMazed, hchouhan
+Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-activity&utm_campaign=donate-link
+Tags: mailchimp,mc4wp,activity,newsletter
+Requires at least: 3.8
+Tested up to: 4.4
+Stable tag: 1.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Shows you MailChimp lists activity, right in your WordPress dashboard.
+
+== Description ==
+
+Shows your MailChimp lists activity, right in your WordPress dashboard.
+
+> This plugin depends on the [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) plugin.
+
+
+== Installation ==
+
+= MailChimp Activity =
+
+Since this plugin depends on the [MailChimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/), you will need to install that first.
+
+= Installing the plugin =
+
+1. In your WordPress admin panel, go to *Plugins > New Plugin*, search for **MailChimp Activity** and click "*Install now*"
+1. Alternatively, download the plugin files manually and upload the contents of `mailchimp-activity.zip` to your plugins directory, which usually is `/wp-content/plugins/`.
+1. Activate the plugin
+1. Make sure your API key is set.
+1. You should now see a new widget on your dashboard. Enjoy!
+
+== Frequently Asked Questions ==
+
+= Which users will be able to see the widget? =
+
+By default, the widget will only be shown to users with `manage_options` capability (administrators).
+
+This behaviour can be customized using the `mc4wp_activity_capability` filter.
+
+`
+// Show MailChimp Activity widget to editor role & up.
+add_filter( 'mc4wp_activity_capability', function( $capability ) {
+   return 'edit_posts';
+});
+`
+
+== Screenshots ==
+
+
+
+== Changelog ==
+
+= 1.0 =
+
+Initial release.
+
+== Upgrade Notice ==

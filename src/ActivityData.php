@@ -2,8 +2,10 @@
 
 namespace MC4WP\Activity;
 
-use DateTime;
-
+/**
+ * Class ActivityData
+ * @package MC4WP\Activity
+ */
 class ActivityData {
 
 	/**
@@ -17,7 +19,10 @@ class ActivityData {
 	 */
 	public function __construct( API $api, $list_id ) {
 		$this->data = $api->get_lists_activity( $list_id );
-		$this->data = array_slice( $this->data, -90 );
+
+		// get last 60 days of data
+		// TODO: Make this period customizable
+		$this->data = array_slice( $this->data, -30 );
 	}
 
 	/**
