@@ -2,6 +2,8 @@
 
 namespace MC4WP\Activity;
 
+use MC4WP_MailChimp;
+
 /**
  * Class AJAX
  *
@@ -21,10 +23,15 @@ class AJAX {
 		$options = mc4wp_get_options();
 		$api       = new API( $options['api_key'] );
 
+		// fetch data
+		$raw_data = $api->get_lists_activity( $list_id );
+
 		if( $_REQUEST['view'] === 'activity' ) {
-			$data      = new ActivityData( $api, $list_id );
+			$data      = new ActivityData( $raw_data );
 		} else {
-			$data      = new SizeData( $api, $list_id );
+			$mailchimp = new MC4WP_MailChimp();
+			$list = $mailchimp->get_list( $list_id );
+			$data      = new SizeData( $raw_data, $list->subscriber_count );
 		}
 
 		wp_send_json_success( $data->to_array() );
