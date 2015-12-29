@@ -1,6 +1,6 @@
 === MailChimp Activity ===
 Contributors: Ibericode, DvanKooten, iMazed, hchouhan
-Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-activity&utm_campaign=donate-link
+Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mc4wp-activity&utm_campaign=donate-link
 Tags: mailchimp,mc4wp,activity,newsletter
 Requires at least: 3.8
 Tested up to: 4.4
@@ -15,7 +15,6 @@ Shows you MailChimp lists activity, right in your WordPress dashboard.
 Shows your MailChimp lists activity, right in your WordPress dashboard.
 
 > This plugin depends on the [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) plugin.
-
 
 == Installation ==
 
@@ -52,8 +51,5 @@ add_filter( 'mc4wp_activity_capability', function( $capability ) {
 
 == Changelog ==
 
-= 1.0 =
-
 Initial release.
-
 == Upgrade Notice ==
