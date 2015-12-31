@@ -14,7 +14,12 @@ Shows you MailChimp lists activity, right in your WordPress dashboard.
 
 Shows your MailChimp lists activity, right in your WordPress dashboard.
 
-> This plugin depends on the [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) plugin.
+**Requirements**
+
+This plugin has the following requirements.
+
+- The [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) plugin.
+- PHP 5.3 or higher.
 
 == Installation ==
 
@@ -47,7 +52,8 @@ add_filter( 'mc4wp_activity_capability', function( $capability ) {
 
 == Screenshots ==
 
-
+1. Showing list activity.
+2. Showing total list size.
 
 == Changelog ==
 
