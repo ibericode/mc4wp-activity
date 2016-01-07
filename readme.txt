@@ -65,5 +65,12 @@ add_filter( 'mc4wp_activity_capability', function( $capability ) {
 
 == Changelog ==
 
+### 1.0.1
+
+Fail gracefully on servers running a PHP version older than PHP 5.3.
+
+
+#### 1.0
+
 Initial release.
 == Upgrade Notice ==
