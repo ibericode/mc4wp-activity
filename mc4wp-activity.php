@@ -27,9 +27,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-use MC4WP_Plugin as Plugin;
-use MC4WP\Activity\AJAX;
-
 defined( 'ABSPATH' ) or exit;
 
 /**
@@ -48,19 +45,22 @@ function __load_mailchimp_activity() {
 	require __DIR__ . '/vendor/autoload.php';
 
 	// instantiate plugin object
-	$plugin = new Plugin( __FILE__, '1.0' );
+	$plugin = new MC4WP_Plugin( __FILE__, '1.0' );
 
-	$widget = new MC4WP\Activity\Dashboard\Widget( $plugin );
+	$classname = 'MC4WP\\Activity\\Dashboard\\Widget';
+	$widget = new $classname( $plugin );
 	$widget->add_hooks();
 
 	if( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-		$ajax = new AJAX();
+		$classname = 'MC4WP\\Activity\\AJAX';
+		$ajax = new $classname();
 		$ajax->hook();
 	}
+
 }
 
-// only hook when this is an admin request
-if( is_admin() ) {
+// only hook when this is an admin request & PHP > 5.3
+if( is_admin() && version_compare( PHP_VERSION, '5.3', '>=' ) ) {
 	add_action( 'plugins_loaded', '__load_mailchimp_activity', 30 );
 }
 
