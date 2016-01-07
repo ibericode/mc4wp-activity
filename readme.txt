@@ -8,11 +8,15 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Shows you MailChimp lists activity, right in your WordPress dashboard.
+Shows activity for your MailChimp lists, right in your WordPress dashboard.
 
 == Description ==
 
-Shows your MailChimp lists activity, right in your WordPress dashboard.
+This plugin shows your MailChimp lists activity, right in your WordPress dashboard.
+
+= MailChimp lists activity =
+
+Once activated, it will show a new dashboard widget containing a bar-graph or line-graph ([screenshots](https://wordpress.org/plugins/mc4wp-activity/screenshots/)) showing day-to-day changes to your MailChimp lists. You can choose to view relative activity (daily subscribes vs. unsubscribes) or a line graph visualizing your total list sizes.
 
 **Requirements**
 
@@ -20,6 +24,8 @@ This plugin has the following requirements.
 
 - The [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) plugin.
 - PHP 5.3 or higher.
+
+To get started with the plugin, please have a look at the [installation guide](https://wordpress.org/plugins/mc4wp-activity/installation/).
 
 == Installation ==
 
@@ -37,7 +43,7 @@ Since this plugin depends on the [MailChimp for WordPress plugin](https://wordpr
 
 == Frequently Asked Questions ==
 
-= Which users will be able to see the widget? =
+= Which user roles can see the activity widget? =
 
 By default, the widget will only be shown to users with `manage_options` capability (administrators).
 
