@@ -3,7 +3,7 @@
 Plugin Name: MailChimp Activity
 Plugin URI: https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mc4wp-activity&utm_campaign=plugins-page
 Description: Shows your MailChimp activity, right in your WordPress dashboard.
-Version: 1.0
+Version: 1.0.1
 Author: ibericode
 Author URI: https://ibericode.com/
 Text Domain: mailchimp-activity
@@ -45,7 +45,7 @@ function __load_mailchimp_activity() {
 	require __DIR__ . '/vendor/autoload.php';
 
 	// instantiate plugin object
-	$plugin = new MC4WP_Plugin( __FILE__, '1.0' );
+	$plugin = new MC4WP_Plugin( __FILE__, '1.0.1' );
 
 	$classname = 'MC4WP\\Activity\\Dashboard\\Widget';
 	$widget = new $classname( $plugin );
