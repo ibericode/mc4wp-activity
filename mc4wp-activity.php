@@ -36,8 +36,8 @@ defined( 'ABSPATH' ) or exit;
  */
 function __load_mailchimp_activity() {
 
-	// check if MailChimp for WordPress is installed.
-	if( ! defined( 'MC4WP_VERSION' ) ) {
+	// check if MailChimp for WordPress v3.0 or later is installed.
+	if( ! defined( 'MC4WP_VERSION' ) || version_compare( MC4WP_VERSION, '3.0', '<' ) ) {
 		return;
 	}
 
@@ -45,10 +45,8 @@ function __load_mailchimp_activity() {
 	require __DIR__ . '/vendor/autoload.php';
 
 	// instantiate plugin object
-	$plugin = new MC4WP_Plugin( __FILE__, '1.0.1' );
-
 	$classname = 'MC4WP\\Activity\\Dashboard\\Widget';
-	$widget = new $classname( $plugin );
+	$widget = new $classname( __FILE__, '1.0.2' );
 	$widget->add_hooks();
 
 	if( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
