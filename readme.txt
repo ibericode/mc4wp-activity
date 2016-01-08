@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mc4wp-activ
 Tags: mailchimp,mc4wp,activity,newsletter
 Requires at least: 3.8
 Tested up to: 4.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,10 +65,17 @@ add_filter( 'mc4wp_activity_capability', function( $capability ) {
 
 == Changelog ==
 
-### 1.0.1
+#### 1.0.2 - January 8, 2016
+
+**Fixes**
+
+Prevent fatal error by checking for [MailChimp for WordPress v3.0](https://mc4wp.com/blog/the-big-three-o-release/) before loading any code.
+
+#### 1.0.1 - January 7, 2016
+
+**Improvements**
 
 Fail gracefully on servers running a PHP version older than PHP 5.3.
-
 
 #### 1.0
 
