@@ -22,7 +22,7 @@ Once activated, it will show a new dashboard widget containing a bar-graph or li
 
 This plugin has the following requirements.
 
-- The [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) plugin.
+- The [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) plugin (3.0 or higher).
 - PHP 5.3 or higher.
 
 To get started with the plugin, please have a look at the [installation guide](https://wordpress.org/plugins/mc4wp-activity/installation/).
@@ -57,6 +57,15 @@ add_filter( 'mc4wp_activity_capability', function( $capability ) {
    return 'edit_posts';
 });
 `
+
+= I've activated MailChimp Activity - but it does nothing =
+
+This usually comes down to any (or multiple) of the following reasons.
+
+- No API key is set in **MailChimp for WP > MailChimp**.
+- You're running an older version of [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/), version 3.0 or higher is required.
+- Your server is running a very outdated version of PHP. MailChimp Activity requires at least PHP 5.3 or higher.
+- If you see the widget but it's stuck at "loading..", there should be [a JavaScript error in your browser console](http://webmasters.stackexchange.com/questions/8525/how-to-open-the-javascript-console-in-different-browsers) telling us what exactly went wrong.
 
 == Screenshots ==
 
