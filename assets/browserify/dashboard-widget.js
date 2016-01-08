@@ -3,8 +3,6 @@
 // vars
 var $ = window.jQuery;
 var rows = [];
-var yMax = 0;
-var yMin = 0;
 var listSelector = document.getElementById('mc4wp-activity-mailchimp-list');
 var chartElement = document.getElementById("mc4wp-activity-chart");
 var viewSelector = document.getElementById('mc4wp-activity-view');
@@ -41,8 +39,6 @@ function getRowData() {
 
 	// restore data
 	rows = [];
-	yMin = 0;
-	yMax = 0;
 
 	rememberValues();
 
@@ -54,6 +50,7 @@ function getRowData() {
 		rows = res.data;
 
 		if( ! res.data || ! res.data.length ) {
+			// @todo make this translatable
 			chartElement.innerHTML = 'Oops. Something went wrong while fetching data from MailChimp.';
 			return;
 		}
@@ -61,18 +58,6 @@ function getRowData() {
 		for( var i=0; i< rows.length; i++ ) {
 			// convert strings to JavaScript Date object
 			rows[i][0].v = new Date(rows[i][0].v);
-
-			// calculate maximum Y value.
-			if(rows[i][1] > yMax ) {
-				yMax = rows[i][1];
-			}
-
-			if( viewSelector.value === 'activity' ) {
-				// calculate minimum Y value
-				if(rows[i][2] < yMin ) {
-					yMin = rows[i][2];
-				}
-			}
 		}
 
 		drawChart();
@@ -87,12 +72,7 @@ function drawChart() {
 			title: 'Date',
 			format: 'MMM d'
 		},
-		vAxis: {
-			viewWindow: {
-				max: yMax * 1.2,
-				min: 0
-			}
-		},
+		vAxis: {},
 		explorer: {
 			maxZoomOut:2,
 			keepInBounds: true
@@ -127,7 +107,6 @@ function ActivityChart( rows, options ) {
 	options.isStacked = true;
 	options.title = 'Activity for list ' + listSelector.options[listSelector.selectedIndex].innerHTML;
 	options.vAxis.title = "Subscriber Activity";
-	options.vAxis.viewWindow.min = yMin * 1.2;
 
 	function draw() {
 		var chart = new google.visualization.ColumnChart(chartElement);
@@ -149,7 +128,6 @@ function SizeChart( rows, options ) {
 
 	options.title = "List size for list " + listSelector.options[listSelector.selectedIndex].innerHTML;
 	options.vAxis.title = "Number of Subscribers";
-	options.vAxis.viewWindow.min = 0;
 	options.legend = { position: 'none' };
 
 	function draw() {

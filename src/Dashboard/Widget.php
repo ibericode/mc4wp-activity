@@ -114,21 +114,36 @@ class Widget {
 			'size' => __( 'Size', 'mailchimp-activity' )
 		);
 
-		echo '<p>';
-		echo '<label for="mc4wp-activity-mailchimp-list">' . __( 'Select MailChimp list', 'mailchimp-activity' ) . '</label>' . ' &nbsp; ';;
+		// <Wrapper>
+		echo '<div style="margin: 0 auto 20px; text-align: center;">';
+
+		// List <select>
+		echo '<div style="display: inline-block; max-width: 50%;">';
+		echo '<label for="mc4wp-activity-mailchimp-list">' . __( 'Select MailChimp list', 'mailchimp-activity' ) . '</label>';
+		echo '<br />';
 		echo '<select id="mc4wp-activity-mailchimp-list">';
 		echo '<option disabled>' . __( 'MailChimp list', 'mailchimp-for-wp' ) . '</option>';
 		foreach ( $mailchimp_lists as $list ) {
 			echo sprintf( '<option value="%s">%s</option>', $list->id, $list->name );
 		}
 		echo '</select>';
+		echo '</div>';
+
+		// View <select>
+		echo '<div style="display: inline-block;">';
+
+		echo '<label for="mc4wp-activity-view" >' . __( 'Select view', 'mailchimp-activity' ) . '</label>';
+		echo '<br />';
 		echo '<select id="mc4wp-activity-view">';
 		echo '<option disabled>' . __( 'View', 'mailchimp-for-wp' ) . '</option>';
 		foreach( $options as $value => $label ) {
 			echo sprintf( '<option value="%s">%s</option>', $value, $label );
 		}
 		echo '</select>';
-		echo '</p>';
+		echo '</div>';
+
+		// </Wrapper>
+		echo '</div>';
 
 		echo '<div id="mc4wp-activity-chart"><p class="help">' . __( 'Loading..', 'mailchimp-activity' ) . '</p></div>';
 	}
