@@ -74,6 +74,17 @@ This usually comes down to any (or multiple) of the following reasons.
 
 == Changelog ==
 
+#### 1.0.3 - February 17, 2016
+
+**Improvements**
+
+- Minor improvements to widget JavaScript.
+
+**Additions**
+
+- Add "period" option which lets you select time period for graph.
+
+
 #### 1.0.2 - January 8, 2016
 
 **Fixes**
