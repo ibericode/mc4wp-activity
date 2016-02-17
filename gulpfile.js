@@ -13,9 +13,10 @@ var streamify = require('gulp-streamify');
 var globby = require('globby');
 var buffer = require('vinyl-buffer');
 var through = require('through2');
+var sourcemaps = require('gulp-sourcemaps');
+var wrap = require('gulp-wrap');
 
 gulp.task('default', ['sass', 'browserify', 'uglify']);
-
 
 gulp.task('sass', function () {
 	var files = './assets/sass/[^_]*.scss';
@@ -38,37 +39,34 @@ gulp.task('browserify', function () {
 		.pipe(buffer());
 
 	globby("./assets/browserify/[^_]*.js").then(function(entries) {
-		var stream = merge(entries.map(function(entry) {
-			var file = entry.split('/').pop();
-
+		merge(entries.map(function(entry) {
 			return browserify({
-				entries: [entry],
-				debug: true
+				entries: [entry]
 			})
 				.bundle()
-				.pipe(source(file))
-
-				// create .js file
+				.pipe(source(entry.split('/').pop()))
+				.pipe(wrap('(function () { var require = undefined; var define = undefined; <%=contents%> })();'))
 				.pipe(rename({ extname: '.js' }))
 				.pipe(gulp.dest('./assets/js'));
-		}));
-
-		stream
-			.pipe(bundledStream);
-	}).catch(function(err) {});
+		})).pipe(bundledStream);
+	}).catch(function(err) {
+		console.log(err);
+	});
 
 	return bundledStream;
 });
 
 gulp.task('uglify', ['browserify'], function() {
 	return gulp.src(['./assets/js/*.js','!./assets/js/*.min.js'])
+		.pipe(sourcemaps.init({loadMaps: true}))
 		.pipe(streamify(uglify()))
 		.pipe(rename({extname: '.min.js'}))
+		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('./assets/js'));
 });
 
 gulp.task('watch', function () {
-	gulp.watch('./assets/sass/**.scss', ['sass']);
-	gulp.watch('./assets/js/src/**.js', ['browserify']);
-	gulp.watch(['./assets/js/*.js','!./assets/js/*.min.js'], ['uglify']);
+	gulp.watch('./assets/sass/**/*.scss', ['sass']);
+	gulp.watch('./assets/js/src/**/*.js', ['browserify']);
+	gulp.watch(['./assets/js/**/*.js','!./assets/js/**/*.min.js'], ['uglify']);
 });
