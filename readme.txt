@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mc4wp-activ
 Tags: mailchimp,mc4wp,activity,newsletter
 Requires at least: 3.8
 Tested up to: 4.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,5 +89,4 @@ Fail gracefully on servers running a PHP version older than PHP 5.3.
 #### 1.0
 
 Initial release.
-
 == Upgrade Notice ==
