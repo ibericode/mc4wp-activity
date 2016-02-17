@@ -11,6 +11,11 @@ use MC4WP_API;
  */
 class API extends MC4WP_API {
 
+	/**
+	 * @param string $list_id
+	 *
+	 * @return array
+	 */
 	public function get_lists_activity( $list_id ) {
 
 		$args = array(

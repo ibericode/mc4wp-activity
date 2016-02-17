@@ -6,10 +6,12 @@ var rows = [];
 var listSelector = document.getElementById('mc4wp-activity-mailchimp-list');
 var chartElement = document.getElementById("mc4wp-activity-chart");
 var viewSelector = document.getElementById('mc4wp-activity-view');
+var periodSelector = document.getElementById('mc4wp-activity-period');
 
 // init
 viewSelector.onchange = getRowData;
 listSelector.onchange = getRowData;
+periodSelector.onchange = getRowData;
 
 getRememberedValues();
 google.load('visualization', '1', {packages: ['corechart', 'bar', 'line']});
@@ -27,11 +29,17 @@ function getRememberedValues() {
 	if( typeof( previouslySelectedViewValue ) === "string" && previouslySelectedViewValue.length ) {
 		viewSelector.value = previouslySelectedViewValue;
 	}
+
+	var previouslySelectedPeriodValue = localStorage.getItem('mc4wp_activity_period');
+	if( previouslySelectedPeriodValue && previouslySelectedPeriodValue.length ) {
+		periodSelector.value = previouslySelectedPeriodValue;
+	}
 }
 
 function rememberValues() {
 	localStorage.setItem( 'mc4wp_activity_list', listSelector.value );
 	localStorage.setItem( 'mc4wp_activity_view', viewSelector.value );
+	localStorage.setItem( 'mc4wp_activity_period', periodSelector.value );
 }
 
 
@@ -45,6 +53,7 @@ function getRowData() {
 	$.getJSON( ajaxurl, {
 		action: 'mc4wp_get_activity',
 		mailchimp_list_id: listSelector.value,
+		period: periodSelector.value,
 		view: viewSelector.value
 	}, function( res ) {
 		rows = res.data;

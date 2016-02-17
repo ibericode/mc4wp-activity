@@ -24,10 +24,11 @@ class SizeData {
 	/**
 	 * @param array $raw_data
 	 * @param int $current_list_size
+	 * @param int $days
 	 */
-	public function __construct( array $raw_data, $current_list_size ) {
+	public function __construct( array $raw_data, $current_list_size, $days = 90 ) {
 		$this->current_list_size = $current_list_size;
-		$this->activity_data = array_slice( $raw_data, -90 );
+		$this->activity_data = array_slice( $raw_data, 0 - $days );
 
 		$this->calculate();
 	}
