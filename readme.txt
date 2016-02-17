@@ -1,5 +1,5 @@
 === MailChimp Activity ===
-Contributors: Ibericode, DvanKooten, iMazed, hchouhan
+Contributors: Ibericode, DvanKooten, hchouhan
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mc4wp-activity&utm_campaign=donate-link
 Tags: mailchimp,mc4wp,activity,newsletter
 Requires at least: 3.8
@@ -89,4 +89,5 @@ Fail gracefully on servers running a PHP version older than PHP 5.3.
 #### 1.0
 
 Initial release.
+
 == Upgrade Notice ==
