@@ -3,6 +3,7 @@
 namespace MC4WP\Activity;
 
 use MC4WP_MailChimp;
+use MC4WP_API_v3;
 
 /**
  * Class AJAX
@@ -25,10 +26,17 @@ class AJAX {
 		$list_id   = (string) $_REQUEST['mailchimp_list_id'];
 		$period  = isset( $_REQUEST['period'] ) ? (int) $_REQUEST['period'] : 30;
 		$options = mc4wp_get_options();
-		$api       = new API( $options['api_key'] );
 
-		// fetch data
-		$raw_data = $api->get_lists_activity( $list_id );
+		if( class_exists( 'MC4WP_API_v3' ) ) {
+			$api = new MC4WP_API_v3( $options['api_key'] );
+			$raw_data = $api->get_list_activity( $list_id );
+		} else {
+			// for backwards compatibility, use old API v2 class.
+			$api       = new API( $options['api_key'] );
+			$raw_data = $api->get_lists_activity( $list_id );
+		}
+
+
 
 		if( $_REQUEST['view'] === 'activity' ) {
 			$data      = new ActivityData( $raw_data, $period );

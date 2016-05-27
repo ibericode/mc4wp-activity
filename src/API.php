@@ -8,6 +8,7 @@ use MC4WP_API;
  * Class API
  *
  * @package MC4WP\Activity
+ * @deprecated 1.1
  */
 class API extends MC4WP_API {
 
