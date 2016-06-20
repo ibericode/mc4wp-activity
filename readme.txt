@@ -3,7 +3,7 @@ Contributors: Ibericode, DvanKooten, hchouhan
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mc4wp-activity&utm_campaign=donate-link
 Tags: mailchimp,mc4wp,activity,newsletter
 Requires at least: 3.8
-Tested up to: 4.4
+Tested up to: 4.5.2
 Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
