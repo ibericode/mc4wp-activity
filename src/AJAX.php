@@ -35,9 +35,7 @@ class AJAX {
 			$api       = new API( $options['api_key'] );
 			$raw_data = $api->get_lists_activity( $list_id );
 		}
-
-
-
+		
 		if( $_REQUEST['view'] === 'activity' ) {
 			$data      = new ActivityData( $raw_data, $period );
 		} else {

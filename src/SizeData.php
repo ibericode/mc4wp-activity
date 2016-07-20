@@ -2,8 +2,6 @@
 
 namespace MC4WP\Activity;
 
-use DateTime;
-
 class SizeData {
 
 	/**
@@ -19,7 +17,12 @@ class SizeData {
 	/**
 	 * @var int
 	 */
-	protected $list_size_today = 0;
+	protected $current_list_size = 0;
+
+	/**
+	 * @var int
+	 */
+	protected $days = 90;
 
 	/**
 	 * @param array $raw_data
@@ -28,8 +31,8 @@ class SizeData {
 	 */
 	public function __construct( array $raw_data, $current_list_size, $days = 90 ) {
 		$this->current_list_size = $current_list_size;
-		$this->activity_data = array_slice( $raw_data, 0 - $days );
-
+		$this->days = $days;
+		$this->activity_data = $raw_data;
 		$this->calculate();
 	}
 
@@ -37,8 +40,18 @@ class SizeData {
 	 * Calculate list size data from activity data
 	 */
 	public function calculate() {
-		// start at today and then fill all the way back
-		$data = array_reverse( $this->activity_data );
+		$data = $this->activity_data;
+
+		// limit to number of days
+		if( count( $data ) > $this->days ) {
+			$data = array_slice( $data, 0 - $this->days );
+		}
+
+		// reverse array if needed, we need to start today and work our way down
+		if( count($data) > 1 && strtotime( $data[0]->day ) < strtotime( $data[1]->day ) ) {
+			$data = array_reverse( $this->activity_data );
+		}
+
 		$size_at_day = $this->current_list_size;
 		$date_format = get_option( 'date_format' );
 
