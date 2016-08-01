@@ -42,7 +42,9 @@ function __load_mailchimp_activity() {
 	}
 
 	// load autoloader
-	require __DIR__ . '/vendor/autoload.php';
+    if( ! class_exists( 'MC4WP\\Activity\\Dashboard\\Widget' ) ) {
+        require __DIR__ . '/vendor/autoload.php';
+    }
 
 	// instantiate plugin object
 	$classname = 'MC4WP\\Activity\\Dashboard\\Widget';
