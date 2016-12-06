@@ -13,9 +13,9 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/ibericode/mailchimp-activity/issues",
-    "forum": "https://wordpress.org/support/plugin/mailchimp-activity",
-    "source": "https://github.com/ibericode/mailchimp-activity"
+    "issues": "https://github.com/ibericode/mc4wp-activity/issues",
+    "forum": "https://wordpress.org/support/plugin/mc4wp-activity",
+    "source": "https://github.com/ibericode/mc4wp-activity"
   },
   "require": {
     "php": ">=5.3.0"
@@ -25,10 +25,5 @@
   },
   "scripts": {
     "test": "vendor/bin/phpunit"
-  },
-  "autoload": {
-    "classmap": [
-      "src/"
-    ]
   }
 }

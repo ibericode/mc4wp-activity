@@ -41,21 +41,17 @@ function __load_mailchimp_activity() {
 		return;
 	}
 
-	// load autoloader
-    if( ! class_exists( 'MC4WP\\Activity\\Dashboard\\Widget' ) ) {
-        require __DIR__ . '/vendor/autoload.php';
-    }
+    require_once __DIR__ . '/src/Widget.php';
+    require_once __DIR__ . '/src/functions.php';
 
 	// instantiate plugin object
-	$classname = 'MC4WP\\Activity\\Dashboard\\Widget';
+	$classname = 'MC4WP\\Activity\\Widget';
+
+    /** @var \MC4WP\Activity\Widget $widget */
 	$widget = new $classname( __FILE__, '1.0.2' );
 	$widget->add_hooks();
 
-	if( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-		$classname = 'MC4WP\\Activity\\AJAX';
-		$ajax = new $classname();
-		$ajax->hook();
-	}
+	add_action( 'wp_ajax_mc4wp_get_activity', 'MC4WP\\Activity\\ajax_handler' );
 
 }
 

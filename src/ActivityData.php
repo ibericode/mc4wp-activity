@@ -18,7 +18,7 @@ class ActivityData {
 	 * @param int $days
 	 */
 	public function __construct( array $raw_data, $days = 30 ) {
-		// get last 60 days of data
+        // get last 60 days of data
 		$this->data = array_slice( $raw_data, 0 - $days );
 	}
 

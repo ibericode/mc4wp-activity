@@ -1,13 +1,13 @@
 <?php
 
-namespace MC4WP\Activity\Dashboard;
+namespace MC4WP\Activity;
 
 use MC4WP_MailChimp;
 use WP_Screen;
 
 /**
  * Class Widget
- * @package MC4WP\Activity\Dashboard
+ * @package MC4WP\Activity
  *
  */
 class Widget {
