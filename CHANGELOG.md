@@ -1,5 +1,11 @@
 # Changelog
 
+#### 1.0.5 - December 9, 2016
+
+**Fixes**
+
+- Time period would not change. This fix depends on version 4.0.11 of [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/changelog/).
+
 
 #### 1.0.4 - August 1, 2016
 
