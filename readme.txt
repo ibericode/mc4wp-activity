@@ -2,9 +2,9 @@
 Contributors: Ibericode, DvanKooten, hchouhan
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mc4wp-activity&utm_campaign=donate-link
 Tags: mailchimp,mc4wp,activity,newsletter
-Requires at least: 3.8
-Tested up to: 4.6
-Stable tag: 1.0.4
+Requires at least: 4.1
+Tested up to: 4.7
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,12 @@ This usually comes down to any (or multiple) of the following reasons.
 2. Showing total list size.
 
 == Changelog ==
+
+#### 1.0.5 - December 9, 2016
+
+**Fixes**
+
+- Time period would not change. This fix depends on version 4.0.11 of [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/changelog/).
 
 
 #### 1.0.4 - August 1, 2016
