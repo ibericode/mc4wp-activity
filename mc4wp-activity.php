@@ -11,7 +11,7 @@ Domain Path: /languages
 License: GPL v2
 
 MailChimp Activity
-Copyright (C) 2015-2016, ibericode <support@ibericode.com>
+Copyright (C) 2015-2017, ibericode <support@ibericode.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ defined( 'ABSPATH' ) or exit;
  *
  * @ignore
  */
-function __load_mailchimp_activity() {
+function _load_mailchimp_activity() {
 
 	// check if MailChimp for WordPress v3.0 or later is installed.
 	if( ! defined( 'MC4WP_VERSION' ) || version_compare( MC4WP_VERSION, '3.0', '<' ) ) {
@@ -57,7 +57,7 @@ function __load_mailchimp_activity() {
 
 // only hook when this is an admin request & PHP > 5.3
 if( is_admin() && version_compare( PHP_VERSION, '5.3', '>=' ) ) {
-	add_action( 'plugins_loaded', '__load_mailchimp_activity', 30 );
+	add_action( 'plugins_loaded', '_load_mailchimp_activity', 30 );
 }
 
 
