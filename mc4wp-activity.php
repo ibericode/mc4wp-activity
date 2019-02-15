@@ -11,7 +11,7 @@ Domain Path: /languages
 License: GPL v2
 
 MailChimp Activity
-Copyright (C) 2015-2017, ibericode <support@ibericode.com>
+Copyright (C) 2015-2019, ibericode <support@ibericode.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
