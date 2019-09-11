@@ -1,5 +1,13 @@
 # Changelog
 
+#### 1.0.6 - Sep 11, 2019
+
+**Changes**
+
+- Change plugin name
+- Change MailChimp to Mailchimp in all texts.
+
+
 #### 1.0.5 - December 9, 2016
 
 **Fixes**
