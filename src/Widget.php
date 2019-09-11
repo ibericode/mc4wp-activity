@@ -73,7 +73,7 @@ class Widget {
 
 		wp_add_dashboard_widget(
 			'mc4wp_activity_widget',         // Widget slug.
-			'MailChimp Activity',         // Title.
+			'Mailchimp Activity',         // Title.
 			array( $this, 'output' ) // Display function.
 		);
 	}
@@ -127,10 +127,10 @@ class Widget {
 
 		// List <select>
 		echo '<div style="display: inline-block; max-width: 33%;">';
-		echo '<label for="mc4wp-activity-mailchimp-list">' . __( 'Select MailChimp list', 'mailchimp-activity' ) . '</label>';
+		echo '<label for="mc4wp-activity-mailchimp-list">' . __( 'Select Mailchimp list', 'mailchimp-activity' ) . '</label>';
 		echo '<br />';
 		echo '<select id="mc4wp-activity-mailchimp-list">';
-		echo '<option disabled>' . __( 'MailChimp list', 'mailchimp-for-wp' ) . '</option>';
+		echo '<option disabled>' . __( 'Mailchimp list', 'mailchimp-for-wp' ) . '</option>';
 		foreach ( $mailchimp_lists as $list ) {
 			echo sprintf( '<option value="%s">%s</option>', $list->id, $list->name );
 		}

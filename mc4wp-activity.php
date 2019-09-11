@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: MailChimp Activity
+Plugin Name: MC4WP: Mailchimp Activity
 Plugin URI: https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mc4wp-activity&utm_campaign=plugins-page
-Description: Shows your MailChimp activity, right in your WordPress dashboard.
+Description: Shows your Mailchimp activity, right in your WordPress dashboard.
 Version: 1.0.5
 Author: ibericode
 Author URI: https://ibericode.com/
@@ -10,7 +10,7 @@ Text Domain: mailchimp-activity
 Domain Path: /languages
 License: GPL v2
 
-MailChimp Activity
+Mailchimp Activity
 Copyright (C) 2015-2019, ibericode <support@ibericode.com>
 
 This program is free software: you can redistribute it and/or modify
@@ -36,7 +36,7 @@ defined( 'ABSPATH' ) or exit;
  */
 function _load_mailchimp_activity() {
 
-	// check if MailChimp for WordPress v3.0 or later is installed.
+	// check if Mailchimp for WordPress v3.0 or later is installed.
 	if( ! defined( 'MC4WP_VERSION' ) || version_compare( MC4WP_VERSION, '3.0', '<' ) ) {
 		return;
 	}

@@ -1,6 +1,6 @@
 {
   "name": "mailchimp-activity",
-  "title": "MailChimp Activity",
+  "title": "Mailchimp Activity",
   "repository": {
     "type": "git",
     "url": "https://github.com/ibericode/mailchimp-activity"

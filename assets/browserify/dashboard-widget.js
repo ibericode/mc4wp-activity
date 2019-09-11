@@ -60,7 +60,7 @@ function getRowData() {
 
 		if( ! res.data || ! res.data.length ) {
 			// @todo make this translatable
-			chartElement.innerHTML = 'Oops. Something went wrong while fetching data from MailChimp.';
+			chartElement.innerHTML = 'Oops. Something went wrong while fetching data from Mailchimp.';
 			return;
 		}
 
