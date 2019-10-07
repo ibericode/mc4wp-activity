@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mc4wp-activ
 Tags: mailchimp,mc4wp,activity,newsletter
 Requires at least: 4.1
 Tested up to: 5.2
-Stable tag: 1.0.6
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.3
@@ -74,6 +74,11 @@ This usually comes down to any (or multiple) of the following reasons.
 2. Showing total list size.
 
 == Changelog ==
+
+#### 1.1.0 - Oct 7, 2019
+
+Compatibility with [Mailchimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) version 4.6.
+
 
 #### 1.0.6 - Sep 11, 2019
 
